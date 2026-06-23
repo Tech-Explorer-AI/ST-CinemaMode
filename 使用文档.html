@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ST-Cinema Mode - 使用指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a1a;
+            color: #ddd;
+            font-family: 'Segoe UI', 'Microsoft YaHei', -apple-system, sans-serif;
+            line-height: 1.8;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: linear-gradient(145deg, rgba(20, 15, 40, 0.95), rgba(10, 10, 30, 0.95));
+            border-radius: 24px;
+            padding: 40px 50px;
+            border: 1px solid rgba(255, 105, 180, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 105, 180, 0.05);
+        }
+
+        /* ========== 头部 ========== */
+        .header {
+            text-align: center;
+            padding-bottom: 30px;
+            border-bottom: 2px solid rgba(255, 105, 180, 0.3);
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            background: linear-gradient(135deg, #ff69b4, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+
+        .header .subtitle {
+            font-size: 18px;
+            color: #888;
+            margin-top: 8px;
+            letter-spacing: 4px;
+        }
+
+        .header .badges {
+            margin-top: 12px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255, 105, 180, 0.15);
+            border: 1px solid rgba(255, 105, 180, 0.3);
+            border-radius: 20px;
+            padding: 4px 16px;
+            font-size: 14px;
+            color: #ffb6c1;
+        }
+
+        .badge.version {
+            color: #ffd700;
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        /* ========== 目录 ========== */
+        .toc {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 16px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            border-left: 4px solid #ff69b4;
+        }
+
+        .toc h2 {
+            font-size: 18px;
+            color: #ffd700;
+            margin-bottom: 12px;
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 8px 20px;
+        }
+
+        .toc a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.2s;
+            display: block;
+            padding: 2px 0;
+        }
+
+        .toc a:hover {
+            color: #ff69b4;
+        }
+
+        /* ========== 通用标题 ========== */
+        h2 {
+            font-size: 28px;
+            color: #ffd700;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 105, 180, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h2 .emoji {
+            font-size: 30px;
+        }
+
+        h3 {
+            font-size: 20px;
+            color: #ff69b4;
+            margin-top: 25px;
+            margin-bottom: 12px;
+        }
+
+        h4 {
+            font-size: 17px;
+            color: #ffb6c1;
+            margin-top: 18px;
+            margin-bottom: 8px;
+        }
+
+        /* ========== 代码块 ========== */
+        pre {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 12px;
+            padding: 16px 20px;
+            overflow-x: auto;
+            border: 1px solid rgba(255, 105, 180, 0.2);
+            margin: 12px 0;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #e0e0e0;
+        }
+
+        code {
+            background: rgba(255, 105, 180, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #ffb6c1;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        pre code {
+            background: transparent;
+            padding: 0;
+            color: inherit;
+        }
+
+        /* ========== 表格 ========== */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 12px 0;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 105, 180, 0.15);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+
+        th {
+            background: rgba(255, 105, 180, 0.15);
+            color: #ffd700;
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid rgba(255, 105, 180, 0.3);
+        }
+
+        td {
+            padding: 9px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            color: #ccc;
+        }
+
+        tr:hover td {
+            background: rgba(255, 105, 180, 0.05);
+        }
+
+        /* ========== 提示框 ========== */
+        .tip {
+            background: rgba(255, 215, 0, 0.08);
+            border-left: 4px solid #ffd700;
+            padding: 12px 18px;
+            border-radius: 8px;
+            margin: 12px 0;
+            color: #ddd;
+        }
+
+        .tip strong {
+            color: #ffd700;
+        }
+
+        .tip.warning {
+            background: rgba(255, 68, 68, 0.08);
+            border-left-color: #ff4444;
+        }
+
+        .tip.warning strong {
+            color: #ff8888;
+        }
+
+        .tip.info {
+            background: rgba(78, 205, 196, 0.08);
+            border-left-color: #4ecdc4;
+        }
+
+        .tip.info strong {
+            color: #4ecdc4;
+        }
+
+        /* ========== 文件树 ========== */
+        .file-tree {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            padding: 16px 24px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #bbb;
+            border: 1px solid rgba(255, 105, 180, 0.1);
+        }
+
+        .file-tree .folder {
+            color: #ffd700;
+        }
+
+        .file-tree .file {
+            color: #88ccff;
+        }
+
+        .file-tree .highlight {
+            color: #ff69b4;
+        }
+
+        /* ========== 标签 ========== */
+        .tag {
+            display: inline-block;
+            background: rgba(255, 105, 180, 0.15);
+            border-radius: 12px;
+            padding: 2px 12px;
+            font-size: 13px;
+            color: #ffb6c1;
+            margin: 2px 4px 2px 0;
+        }
+
+        .tag.green {
+            background: rgba(78, 205, 196, 0.15);
+            color: #4ecdc4;
+        }
+
+        .tag.gold {
+            background: rgba(255, 215, 0, 0.15);
+            color: #ffd700;
+        }
+
+        /* ========== 徽章行 ========== */
+        .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 6px 0;
+        }
+
+        /* ========== 响应式 ========== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            pre {
+                font-size: 13px;
+                padding: 12px 14px;
+            }
+
+            .toc-grid {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            th,
+            td {
+                padding: 6px 10px;
+            }
+        }
+
+        /* ========== 滚动条 ========== */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ff69b4;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff88cc;
+        }
+
+        /* ========== 代码高亮（简单） ========== */
+        .hljs-keyword {
+            color: #ff69b4;
+        }
+
+        .hljs-string {
+            color: #ffd700;
+        }
+
+        .hljs-comment {
+            color: #666;
+            font-style: italic;
+        }
+
+        .hljs-number {
+            color: #4ecdc4;
+        }
+
+        .hljs-function {
+            color: #88ccff;
+        }
+
+        .hljs-variable {
+            color: #ffb6c1;
+        }
+
+        /* ========== 分隔线 ========== */
+        hr {
+            border: none;
+            border-top: 1px solid rgba(255, 105, 180, 0.15);
+            margin: 30px 0;
+        }
+
+        /* ========== 底部 ========== */
+        .footer {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 105, 180, 0.15);
+            color: #666;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: #ff69b4;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #ffd700;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- ==================== 头部 ==================== -->
+        <div class="header">
+            <h1>🎬 ST-Cinema Mode</h1>
+            <div class="subtitle">— 完整使用指南 —</div>
+            <div class="badges">
+                <span class="badge version">📌 v1.0.0</span>
+                <span class="badge">🎨 25+ 主题</span>
+                <span class="badge">🎲 内置骰子</span>
+                <span class="badge">👥 智能角色识别</span>
+            </div>
+        </div>
+
+        <!-- ==================== 目录 ==================== -->
+        <div class="toc">
+            <h2>📋 目录</h2>
+            <div class="toc-grid">
+                <a href="#prompt-format">📝 提示词格式</a>
+                <a href="#image-naming">🖼️ 图片命名方式</a>
+                <a href="#music-naming">🎵 音乐命名方式</a>
+                <a href="#background-naming">🌄 背景命名方式</a>
+                <a href="#code-locations">🔧 代码修改位置</a>
+                <a href="#details">💡 使用细节</a>
+                <a href="#faq">❓ 常见问题</a>
+                <a href="#examples">📚 完整示例</a>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- ==================== 提示词格式 ==================== -->
+        <!-- ============================================================ -->
+
+        <h2 id="prompt-format"><span class="emoji">📝</span> 提示词格式</h2>
+
+        <h3>1. 状态栏格式 (Status Bar)</h3>
+        <p>状态栏需要用 <code>```markdown</code> 包裹：</p>
+
+        <pre><code>
+ ```markdown
+【第X天 · 时段 · 天气】
+📍 当前位置：地点名称
+🎵 音乐：音乐名
+
+【人物状态】
+❤️ 体力：数值/最大值
+🧠 理智：数值/最大值
+😢 悲伤值：数值/最大值
+
+【角色属性】
+💪 力量：数值
+🏃 敏捷：数值
+📚 智力：数值
+
+【物品栏】
+物品名1：数量（备注）
+物品名2：数量
+
+【人际关系】
+【角色名|性别|显隐|心情|好感度:数值/100】-关系描述
+
+【其他任意栏目】
+任意内容...
+```</code></pre>
+
+        <h4>状态栏各字段说明：</h4>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>字段</th>
+                        <th>格式</th>
+                        <th>示例</th>
+                        <th>说明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>天数</td>
+                        <td><code>第X天</code></td>
+                        <td><code>第1天</code></td>
+                        <td>自动识别</td>
+                    </tr>
+                    <tr>
+                        <td>时段</td>
+                        <td><code>清晨/早晨/上午/中午/下午/傍晚/夜晚/深夜</code></td>
+                        <td><code>傍晚</code></td>
+                        <td>自动识别</td>
+                    </tr>
+                    <tr>
+                        <td>天气</td>
+                        <td><code>晴天/阴天/雨天/暴雨/雪天/雾天</code></td>
+                        <td><code>阴天</code></td>
+                        <td>自动识别</td>
+                    </tr>
+                    <tr>
+                        <td>位置</td>
+                        <td><code>📍 当前位置：XXX</code></td>
+                        <td><code>📍 当前位置：大学宿舍楼</code></td>
+                        <td>自动识别</td>
+                    </tr>
+                    <tr>
+                        <td>状态属性</td>
+                        <td><code>名称：数值/最大值</code></td>
+                        <td><code>体力：85/100</code></td>
+                        <td>显示为进度条</td>
+                    </tr>
+                    <tr>
+                        <td>角色属性</td>
+                        <td><code>名称：数值</code></td>
+                        <td><code>力量：8</code></td>
+                        <td>显示为数值</td>
+                    </tr>
+                    <tr>
+                        <td>物品</td>
+                        <td><code>名称：数量（备注）</code></td>
+                        <td><code>手机：1（电量67%）</code></td>
+                        <td>显示带图标</td>
+                    </tr>
+                    <tr>
+                        <td>角色关系</td>
+                        <td><code>【名|性别|显隐|心情|好感度:数值/100】-描述</code></td>
+                        <td><code>【张磊|男|显|开心|好感度:75/100】-室友</code></td>
+                        <td>显示立绘+好感度</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tip">
+            <strong>💡 角色关系格式详解：</strong><br>
+            <code>【角色名|性别|显隐|心情|好感度:数值/100】-描述</code><br>
+            <span class="tag">性别</span> 男 / 女
+            <span class="tag">显隐</span> 显（显示）/ 隐（隐藏）
+            <span class="tag">心情</span> 开心/害羞/生气/忧伤/惊讶/温馨/紧张/浪漫/欢乐/悲伤/日常
+            <span class="tag">好感度</span> -100 ~ +100
+            <span class="tag">描述</span> 角色的关系描述
+        </div>
+
+        <pre><code>状态栏中的人际关系可以放在上下文中。
+            ```makedown
+            【人际关系】
+            【角色名|性别|显隐|心情|好感度:数值/100】-关系描述
+            ```
+            通过多次给予AI提示，AI可以将人际关系渲染于上下文中，从而动态的切换立绘的心情，显示。
+            例如：
+            ```
+            【第3天 · 夜晚 · 晴朗】 
+            📍 当前位置：教学楼天台
+            🎵 音乐：浪漫
+
+            【人物状态】
+            ❤️ 体力：65/100
+            🧠 理智：80/100
+            🌪️ 混乱值：10/100
+            😢 悲伤值：5/100
+
+            【角色属性】
+            💪 力量：7
+            🏃 敏捷：6
+            📚 智力：9
+            ✨ 魅力：8
+
+            【物品栏】
+            手机：1（电量45%）
+            手电筒：1
+            笔记本：1（写满笔记）
+            能量饮料：2
+
+            【人际关系】
+            【林晓|女|显|开心|好感度:55/100】-同班同学，天文社社长
+            【张磊|男|显|日常|好感度:35/100】-室友，电竞高手
+            【李老师|女|隐|严肃|好感度:20/100】-班主任，要求严格
+            ```
+            🎵 音乐：意外
+
+            今晚的星空格外璀璨，银河清晰可见。
+            微风轻拂，带来远处花香。
+            啊，张磊不见了！
+
+            ```makedown
+            【人际关系】
+            【张磊|男|隐|日常|好感度:35/100】-室友，电竞高手
+            ```
+
+            天知道他去了哪里！
+
+            [[[
+            你站在天台边缘，仰望星空。林晓轻声问道：
+            "在想什么呢？"
+
+            A. "在想宇宙的浩瀚，我们如此渺小"
+            B. "在想你为什么会在这里" （温柔）
+            C. "在想明天考试的事" （苦笑）
+            D. 沉默不语，静静看星星
+            ]]]
+                    </code></pre>
+        <h3>2. 选项格式 (Options)</h3>
+        <p>选项需要用 <code>[[[</code> 和 <code>]]]</code> 包裹：</p>
+
+        <pre><code>[[[
+请选择你的行动：
+A. 选项内容一
+B. 选项内容二
+C. 选项内容三
+D. 选项内容四
+]]]</code></pre>
+
+        <h4>支持的选项格式：</h4>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>格式</th>
+                        <th>示例</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>[A] 文字</code></td>
+                        <td><code>[A] 和张磊一起打游戏</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>A. 文字</code></td>
+                        <td><code>A. 和张磊一起打游戏</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>**A.** 文字</code></td>
+                        <td><code>**A.** 和张磊一起打游戏</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>A) 文字</code></td>
+                        <td><code>A) 和张磊一起打游戏</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>A、文字</code></td>
+                        <td><code>A、和张磊一起打游戏</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>3. 音乐切换格式</h3>
+        <p>在任意位置添加以下格式切换背景音乐：</p>
+        <pre><code>🎵 音乐：音乐名
+[音乐：音乐名]
+【音乐：音乐名】
+播放音乐：音乐名
+BGM：音乐名</code></pre>
+        <p><strong>示例：</strong> <code>🎵 音乐：浪漫</code></p>
+
+        <h3>4. 完整示例</h3>
+        <pre><code>
+```markdown
+【第2天 · 夜晚 · 晴天】
+📍 当前位置：天台
+🎵 音乐：浪漫
+
+【人物状态】
+❤️ 体力：72/100
+🧠 理智：88/100
+🌪️ 混乱值：15/100
+
+【角色属性】
+💪 力量：6
+🏃 敏捷：8
+📚 智力：9
+
+【人际关系】
+【林晓|女|显|开心|好感度:45/100】- 同班同学，喜欢看星星
+【张磊|男|显|日常|好感度:30/100】- 室友，性格开朗
+
+【物品栏】
+手机：1（电量67%）
+手电筒：1（电量充足）
+星图：1（星座指南）
+```
+🎵 音乐：宁静
+
+[[[
+今晚的星空很美，你想做什么？
+A. 和林晓一起看星星
+B. 独自思考人生
+C. 打电话给张磊
+D. 回宿舍休息
+]]]
+
+</code></pre>
+
+        <!-- ============================================================ -->
+        <!-- ==================== 图片命名方式 ==================== -->
+        <!-- ============================================================ -->
+        <h2 id="image-naming"><span class="emoji">🖼️</span> 图片命名方式</h2>
+        <h3>1. 角色立绘 (Portrait)</h3>
+        <h4>目录结构：</h4>
+        <div class="file-tree"> <span class="folder">📁 images/</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="folder">📁 portrait/</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="folder">📁 library/</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">📁 女/</span>
+            <span class="highlight">← 女性角色立绘</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── 1.png</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── 2.png</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">└── ...</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">📁 男/</span>
+            <span class="highlight">← 男性角色立绘</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── 1.png</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">└── ...</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">📁 通用/</span>
+            <span class="highlight">← 通用立绘</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── 1.png</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">└── 2.png</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">📁 player/</span> <span
+                class="highlight">← 玩家立绘（可选）</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">└── 探客.png</span>
+        </div>
+        <h4>命名规则：</h4>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>类型</th>
+                        <th>命名方式</th>
+                        <th>示例</th>
+                        <th>说明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="tag">同名立绘</span></td>
+                        <td><code>角色名.格式</code></td>
+                        <td><code>林晓.png</code></td>
+                        <td>直接匹配角色名</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag gold">心情立绘</span></td>
+                        <td><code>角色名/心情.格式</code></td>
+                        <td><code>林晓/开心.png</code></td>
+                        <td>按心情切换</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag green">图库立绘</span></td>
+                        <td><code>数字.格式</code></td>
+                        <td><code>1.png</code></td>
+                        <td>随机分配</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tip info"> <strong>📌 支持的图片格式：</strong> <span class="tag">.png</span> (推荐) <span
+                class="tag">.jpg</span> <span class="tag">.jpeg</span> <span class="tag">.webp</span> </div>
+        <h4>心情文件夹立绘（高级用法）：</h4>
+        <div class="file-tree"> <span class="folder">📁 images/portrait/library/女/林晓/</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── 日常.png</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── 开心.png</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── 害羞.png</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── 生气.png</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── 忧伤.png</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── 惊讶.png</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── 温馨.png</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── 紧张.png</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── 浪漫.png</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">└── 悲伤.png</span> </div>
+        <p>系统会根据角色当前心情自动切换对应立绘。</p>
+        <h3>2. 场景背景 (Background)</h3>
+        <h4>目录结构：</h4>
+        <div class="file-tree"> <span class="folder">📁 images/background/</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── 标题.jpg</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── 教室.jpg</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── 天台.jpg</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── 天空.jpg</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── 小巷.jpg</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── 伦敦.jpg</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── 草原.jpg</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── 森林.jpg</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── 海洋.jpg</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">└── 默认.jpg</span> </div>
+        <!-- ============================================================ -->
+        <!-- ==================== 音乐命名方式 ==================== -->
+        <!-- ============================================================ -->
+        <h2 id="music-naming"><span class="emoji">🎵</span> 音乐命名方式</h2>
+        <h4>目录结构：</h4>
+        <div class="file-tree"> <span class="folder">📁 images/music/</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── 日常.mp3</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── 欢乐.mp3</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── 温馨.mp3</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── 紧张.mp3</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── 浪漫.mp3</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── 悲伤.mp3</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── 宁静.mp3</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── 神秘.mp3</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── 振奋.mp3</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── 比赛.mp3</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── 忧伤.mp3</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── 意外.mp3</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── 希望.mp3</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── 主题.mp3</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">└── 新的开始.mp3</span> </div>
+        <div class="tip info"> <strong>📌 支持的音频格式：</strong> <span class="tag">.mp3</span> (推荐) <span
+                class="tag">.ogg</span> <span class="tag">.wav</span> <span class="tag">.aac</span> </div>
+        <!-- ============================================================ -->
+        <!-- ==================== 背景命名方式 ==================== -->
+        <!-- ============================================================ -->
+        <h2 id="background-naming"><span class="emoji">🌄</span> 背景命名方式</h2>
+        <h4>背景映射表 (SCENE_FILE_MAP)：</h4>
+        <p>在 <code>index.js</code> 中找到 <code>SCENE_FILE_MAP</code> 对象：</p>
+        <pre><code><span class="hljs-keyword">const</span> SCENE_FILE_MAP = { <span class="hljs-string">'标题'</span>: <span class="hljs-string">'标题'</span>, <span class="hljs-string">'教室'</span>: <span class="hljs-string">'教室'</span>, <span class="hljs-string">'天空'</span>: <span class="hljs-string">'天空'</span>, <span class="hljs-string">'天台'</span>: <span class="hljs-string">'天台'</span>, <span class="hljs-string">'小巷'</span>: <span class="hljs-string">'小巷'</span>, <span class="hljs-string">'伦敦'</span>: <span class="hljs-string">'伦敦'</span>, <span class="hljs-string">'洛阳'</span>: <span class="hljs-string">'洛阳'</span>, <span class="hljs-string">'开封'</span>: <span class="hljs-string">'开封'</span>, <span class="hljs-comment">// ... 添加更多映射</span> <span class="hljs-string">'默认'</span>: <span class="hljs-string">'默认'</span> };</code></pre>
+        <div class="tip"> <strong>📌 添加新背景：</strong><br> 1. 将图片放入 <code>images/background/</code> 文件夹<br> 2. 在
+            <code>SCENE_FILE_MAP</code> 中添加映射：
+            <pre><code><span class="hljs-string">'新场景名'</span>: <span class="hljs-string">'图片文件名'</span>, <span class="hljs-comment">// 不含扩展名</span></code></pre>
+        </div>
+        <div class="tip info"> <strong>📌 支持的图片格式：</strong> <span class="tag">.jpg</span> (推荐) <span
+                class="tag">.png</span> <span class="tag">.jpeg</span> <span class="tag">.webp</span> <span
+                class="tag">.gif</span> </div> <!-- ============================================================ -->
+        <!-- ==================== 代码修改位置 ==================== -->
+        <!-- ============================================================ -->
+        <h2 id="code-locations"><span class="emoji">🔧</span> 代码修改位置</h2>
+        <p><strong>文件位置：</strong> <code>index.js</code></p>
+        <h3>1. 添加新背景场景</h3>
+        <p><strong>搜索：</strong> <code>SCENE_FILE_MAP</code></p>
+        <pre><code><span class="hljs-keyword">const</span> SCENE_FILE_MAP = { <span class="hljs-string">'标题'</span>: <span class="hljs-string">'标题'</span>, <span class="hljs-string">'教室'</span>: <span class="hljs-string">'教室'</span>, <span class="hljs-comment">// 在这里添加新的背景映射</span> <span class="hljs-string">'新场景名'</span>: <span class="hljs-string">'图片文件名'</span>, <span class="hljs-comment">// 例如：'城堡': 'castle'</span> <span class="hljs-string">'默认'</span>: <span class="hljs-string">'默认'</span> };</code></pre>
+        <h3>2. 添加新情绪音乐</h3>
+        <p><strong>搜索：</strong> <code>MUSIC_MAP</code></p>
+        <pre><code><span class="hljs-keyword">const</span> MUSIC_MAP = { <span class="hljs-string">'开心'</span>: <span class="hljs-string">'欢乐'</span>, <span class="hljs-string">'害羞'</span>: <span class="hljs-string">'温馨'</span>, <span class="hljs-comment">// 在这里添加新的情绪映射</span> <span class="hljs-string">'新情绪'</span>: <span class="hljs-string">'音乐文件名'</span>, <span class="hljs-comment">// 例如：'史诗': 'epic'</span> <span class="hljs-string">'日常'</span>: <span class="hljs-string">'日常'</span> };</code></pre>
+        <h3>3. 添加新情绪关键词</h3>
+        <p><strong>搜索：</strong> <code>EMOTION_KEYWORDS</code></p>
+        <pre><code><span class="hljs-keyword">const</span> EMOTION_KEYWORDS = { <span class="hljs-string">'开心'</span>: [<span class="hljs-string">'哈哈'</span>, <span class="hljs-string">'开心'</span>, <span class="hljs-string">'高兴'</span>], <span class="hljs-string">'害羞'</span>: [<span class="hljs-string">'脸红'</span>, <span class="hljs-string">'不好意思'</span>], <span class="hljs-comment">// 在这里添加新的情绪关键词</span> <span class="hljs-string">'新情绪'</span>: [<span class="hljs-string">'关键词1'</span>, <span class="hljs-string">'关键词2'</span>, <span class="hljs-string">'关键词3'</span>], };</code></pre>
+        <h3>4. 添加新物品图标</h3>
+        <p><strong>搜索：</strong> <code>ITEM_ICON_MAP</code></p>
+        <pre><code><span class="hljs-keyword">const</span> ITEM_ICON_MAP = { <span class="hljs-string">'手机'</span>: <span class="hljs-string">'📱'</span>, <span class="hljs-string">'电脑'</span>: <span class="hljs-string">'💻'</span>, <span class="hljs-comment">// 在这里添加新的物品图标</span> <span class="hljs-string">'新物品名'</span>: <span class="hljs-string">'图标'</span>, <span class="hljs-comment">// 例如：'魔法书': '📕'</span> };</code></pre>
+        <h3>5. 添加新心情图标</h3>
+        <p><strong>搜索：</strong> <code>MOOD_ICON_MAP</code></p>
+        <pre><code><span class="hljs-keyword">const</span> MOOD_ICON_MAP = { <span class="hljs-string">'开心'</span>: <span class="hljs-string">'😊'</span>, <span class="hljs-string">'害羞'</span>: <span class="hljs-string">'😳'</span>, <span class="hljs-comment">// 在这里添加新的心情图标</span> <span class="hljs-string">'新心情'</span>: <span class="hljs-string">'图标'</span>, <span class="hljs-comment">// 例如：'兴奋': '🤩'</span> };</code></pre>
+        <h3>6. 添加栏目关键词</h3>
+        <p><strong>搜索：</strong> <code>SECTION_KEYWORDS</code></p>
+        <pre><code><span class="hljs-keyword">const</span> SECTION_KEYWORDS = { <span class="hljs-string">'人物状态'</span>: [<span class="hljs-string">'人物状态'</span>, <span class="hljs-string">'状态'</span>], <span class="hljs-string">'角色属性'</span>: [<span class="hljs-string">'角色属性'</span>, <span class="hljs-string">'属性'</span>], <span class="hljs-comment">// 在这里添加新的栏目</span> <span class="hljs-string">'新栏目名'</span>: [<span class="hljs-string">'关键词1'</span>, <span class="hljs-string">'关键词2'</span>], };</code></pre>
+        <h3>7. 自定义主题</h3>
+        <p><strong>搜索：</strong> <code>this.themes = {</code></p>
+        <pre><code><span class="hljs-keyword">class</span> ThemeManager { <span class="hljs-function">constructor</span>() { <span class="hljs-keyword">this</span>.themes = { <span class="hljs-string">'default'</span>: { name: <span class="hljs-string">'默认'</span>, icon: <span class="hljs-string">'🎬'</span>, description: <span class="hljs-string">'经典影院风格'</span>, colors: { primary: <span class="hljs-string">'#ff69b4'</span>, secondary: <span class="hljs-string">'#ff4444'</span>, bg: <span class="hljs-string">'linear-gradient(135deg, #0a0a1a, #1a1a2e)'</span>, text: <span class="hljs-string">'#ffffff'</span>, accent: <span class="hljs-string">'#ffd700'</span>, cardBg: <span class="hljs-string">'rgba(0,0,0,0.6)'</span>, border: <span class="hljs-string">'rgba(255,105,180,0.3)'</span>, glow: <span class="hljs-string">'rgba(255,105,180,0.2)'</span>, textAreaBg: <span class="hljs-string">'rgba(0,0,0,0.75)'</span> } }, <span class="hljs-comment">// 在这里添加新主题</span> <span class="hljs-string">'newtheme'</span>: { name: <span class="hljs-string">'新主题名'</span>, icon: <span class="hljs-string">'🌟'</span>, description: <span class="hljs-string">'主题描述'</span>, colors: { primary: <span class="hljs-string">'#颜色代码'</span>, secondary: <span class="hljs-string">'#颜色代码'</span>, bg: <span class="hljs-string">'背景渐变'</span>, text: <span class="hljs-string">'#文本颜色'</span>, accent: <span class="hljs-string">'#强调色'</span>, cardBg: <span class="hljs-string">'卡片背景'</span>, border: <span class="hljs-string">'边框颜色'</span>, glow: <span class="hljs-string">'发光颜色'</span>, textAreaBg: <span class="hljs-string">'文本区背景'</span> } } }; } }</code></pre>
+        <h3>8. 调整角色图库数量</h3>
+        <p><strong>搜索：</strong> <code>discoverImagesByFolder</code></p>
+        <pre><code><span class="hljs-keyword">async</span> <span class="hljs-function">discoverImagesByFolder</span>() { <span class="hljs-keyword">const</span> commonFormats = [<span class="hljs-string">'png'</span>, <span class="hljs-string">'jpg'</span>, <span class="hljs-string">'jpeg'</span>, <span class="hljs-string">'webp'</span>];
+<span class="hljs-comment">// 女性立绘数量（默认1-91）</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i <= <span class="hljs-number">91</span>; i++) {
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> format <span class="hljs-keyword">of</span> commonFormats) {
+<span class="hljs-keyword">this</span>.portraitLibrary.female.push(<span class="hljs-string"><span class="hljs-subst">${i}</span>.<span class="hljs-subst">${format}</span></span>);
+}
+}
+
+<span class="hljs-comment">// 男性立绘数量（默认1-12）</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i <= <span class="hljs-number">12</span>; i++) {
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> format <span class="hljs-keyword">of</span> commonFormats) {
+<span class="hljs-keyword">this</span>.portraitLibrary.male.push(<span class="hljs-string"><span class="hljs-subst">${i}</span>.<span class="hljs-subst">${format}</span></span>);
+}
+}
+
+<span class="hljs-comment">// 通用立绘数量（默认1-2）</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i <= <span class="hljs-number">2</span>; i++) {
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> format <span class="hljs-keyword">of</span> commonFormats) {
+<span class="hljs-keyword">this</span>.portraitLibrary.unknown.push(<span class="hljs-string"><span class="hljs-subst">${i}</span>.<span class="hljs-subst">${format}</span></span>);
+}
+}
+}</code></pre>
+
+        <!-- ============================================================ -->
+        <!-- ==================== 使用细节 ==================== -->
+        <!-- ============================================================ -->
+        <h2 id="details"><span class="emoji">💡</span> 使用细节</h2>
+        <h3>1. 角色立绘优先级</h3>
+        <p>系统按以下优先级加载角色立绘：</p>
+        <ol>
+            <li><strong>心情文件夹立绘</strong> - <code>images/portrait/library/[性别]/[角色名]/[心情].png</code></li>
+            <li><strong>同名立绘</strong> - <code>images/portrait/[角色名].png</code></li>
+            <li><strong>性别文件夹立绘</strong> - <code>images/portrait/library/[性别]/[数字].png</code></li>
+            <li><strong>通用立绘</strong> - <code>images/portrait/library/通用/[数字].png</code></li>
+            <li><strong>默认占位符</strong> - 👤 表情符号</li>
+        </ol>
+        <h3>2. 心情自动检测</h3>
+        <p>系统会根据文本中的关键词自动检测角色心情：</p>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>心情</th>
+                        <th>触发关键词</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>开心</td>
+                        <td>哈哈、开心、高兴、真好、耶、😊、愉快、喜悦、雀跃</td>
+                    </tr>
+                    <tr>
+                        <td>害羞</td>
+                        <td>脸红、不好意思、讨厌、别说了、笨蛋、😳、羞涩</td>
+                    </tr>
+                    <tr>
+                        <td>生气</td>
+                        <td>生气、愤怒、可恶、混蛋、😠、恼火、暴怒</td>
+                    </tr>
+                    <tr>
+                        <td>忧伤</td>
+                        <td>唉、悲伤、难过、失落、😢、心痛、抑郁</td>
+                    </tr>
+                    <tr>
+                        <td>惊讶</td>
+                        <td>什么、真的吗、惊讶、😲、震惊、意外</td>
+                    </tr>
+                    <tr>
+                        <td>温馨</td>
+                        <td>温柔、微笑、阳光、温暖、暖意、🥰</td>
+                    </tr>
+                    <tr>
+                        <td>紧张</td>
+                        <td>紧张、危险、不安、害怕、恐惧、😖</td>
+                    </tr>
+                    <tr>
+                        <td>浪漫</td>
+                        <td>心跳、喜欢、爱、牵手、拥抱、💕</td>
+                    </tr>
+                    <tr>
+                        <td>振奋</td>
+                        <td>振奋、激动、热血、燃、斗志、激昂</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <h3>3. 好感度阶段</h3>
+        <p>系统根据数值自动显示对应阶段：</p>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>范围</th>
+                        <th>阶段</th>
+                        <th>图标</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>90-100</td>
+                        <td>挚爱</td>
+                        <td>💕</td>
+                    </tr>
+                    <tr>
+                        <td>70-89</td>
+                        <td>热恋</td>
+                        <td>💗</td>
+                    </tr>
+                    <tr>
+                        <td>50-69</td>
+                        <td>喜欢</td>
+                        <td>💖</td>
+                    </tr>
+                    <tr>
+                        <td>30-49</td>
+                        <td>友好</td>
+                        <td>💙</td>
+                    </tr>
+                    <tr>
+                        <td>10-29</td>
+                        <td>认识</td>
+                        <td>💚</td>
+                    </tr>
+                    <tr>
+                        <td>0-9</td>
+                        <td>陌生</td>
+                        <td>💔</td>
+                    </tr>
+                    <tr>
+                        <td>-1 到 -19</td>
+                        <td>冷淡</td>
+                        <td>😒</td>
+                    </tr>
+                    <tr>
+                        <td>-20 到 -49</td>
+                        <td>厌恶</td>
+                        <td>😤</td>
+                    </tr>
+                    <tr>
+                        <td>-50 到 -79</td>
+                        <td>憎恨</td>
+                        <td>👿</td>
+                    </tr>
+                    <tr>
+                        <td>-80 到 -100</td>
+                        <td>死敌</td>
+                        <td>⚔️</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <h3>4. 自动播放速度</h3>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>速度设置</th>
+                        <th>字/分钟</th>
+                        <th>适用场景</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>slow</code></td>
+                        <td>180</td>
+                        <td>仔细阅读</td>
+                    </tr>
+                    <tr>
+                        <td><code>galgame</code></td>
+                        <td>240</td>
+                        <td>视觉小说风格</td>
+                    </tr>
+                    <tr>
+                        <td><code>normal</code></td>
+                        <td>300</td>
+                        <td>标准阅读</td>
+                    </tr>
+                    <tr>
+                        <td><code>fast</code></td>
+                        <td>450</td>
+                        <td>快速浏览</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p>在控制台切换速度：</p>
+        <pre><code>setReadingSpeed('galgame') <span class="hljs-comment">// 可选: slow, normal, fast, galgame</span></code></pre>
+        <h3>5. 骰子系统</h3>
+        <ul>
+            <li>支持的骰子类型：D4, D6, D8, D10, D12, D20, D100</li>
+            <li>支持修正值 (例如 D20+5)</li>
+            <li>自动检测大成功 (Natural 20) 和大失败 (Natural 1)</li>
+        </ul>
+        <p><strong>骰子结果格式：</strong></p>
+        <pre><code>[骰子结果] 掷出了 d20 = 18 + 2 = 20 [骰子结果] 掷出了 d20 = 20 ✨ 大成功！(Natural 20) ✨ [骰子结果] 掷出了 d20 = 1 💀 大失败！(Natural 1) 💀</code></pre>
+        <h3>6. 数据持久化</h3>
+        <p>所有数据自动保存在浏览器本地存储：</p>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>存储键</th>
+                        <th>内容</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>cinema_mode_data</code></td>
+                        <td>影院模式完整存档</td>
+                    </tr>
+                    <tr>
+                        <td><code>cinema_sync_data</code></td>
+                        <td>状态同步数据</td>
+                    </tr>
+                    <tr>
+                        <td><code>cinema_game_log</code></td>
+                        <td>游戏日志</td>
+                    </tr>
+                    <tr>
+                        <td><code>cinema_theme</code></td>
+                        <td>当前主题设置</td>
+                    </tr>
+                    <tr>
+                        <td><code>cinema_summaries</code></td>
+                        <td>上下文总结</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <h3>7. 键盘快捷键</h3>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>快捷键</th>
+                        <th>功能</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>点击文本区域</td>
+                        <td>前进到下一段</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl+Enter</td>
+                        <td>发送自定义指令</td>
+                    </tr>
+                    <tr>
+                        <td>Enter (在输入框中)</td>
+                        <td>换行</td>
+                    </tr>
+                    <tr>
+                        <td>Esc</td>
+                        <td>关闭选项面板</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> <!-- ============================================================ -->
+        <!-- ==================== 常见问题 ==================== -->
+        <!-- ============================================================ -->
+        <h2 id="faq"><span class="emoji">❓</span> 常见问题</h2>
+        <div class="tip warning"> <strong>Q: 角色立绘不显示？</strong><br> <strong>A:</strong> 检查： <ul>
+                <li>图片是否在正确的文件夹 (<code>images/portrait/library/女/</code> 或 <code>images/portrait/library/男/</code>)</li>
+                <li>文件名是否匹配（注意大小写，中文文件名）</li>
+                <li>图片格式是否支持（推荐 PNG）</li>
+                <li>角色名是否在状态栏的人际关系中出现</li>
+            </ul>
+        </div>
+        <div class="tip warning"> <strong>Q: 音乐不播放？</strong><br> <strong>A:</strong> 检查： <ul>
+                <li>音乐文件是否为 MP3 格式</li>
+                <li>文件是否在 <code>images/music/</code> 目录</li>
+                <li>浏览器是否允许自动播放</li>
+                <li>音乐文件名是否与 <code>MUSIC_MAP</code> 中的映射一致</li>
+            </ul>
+        </div>
+        <div class="tip warning"> <strong>Q: 状态栏不解析？</strong><br> <strong>A:</strong> 检查： <ul>
+                <li>是否用 <code>```</code> 包裹（注意是三个反引号）</li>
+                <li>格式是否正确（使用中文冒号：）</li>
+                <li>栏目名是否在关键词列表中</li>
+                <li>是否在状态栏前有 <code>````markdown</code> 标记</li>
+            </ul>
+        </div>
+        <div class="tip warning"> <strong>Q: 选项不显示？</strong><br> <strong>A:</strong> 检查： <ul>
+                <li>是否用 <code>[[[</code> 和 <code>]]]</code> 包裹</li>
+                <li>选项格式是否正确（A. B. C. D.）</li>
+                <li>选项是否在单独的行</li>
+            </ul>
+        </div>
+        <div class="tip warning"> <strong>Q: 背景图片不显示？</strong><br> <strong>A:</strong> 检查： <ul>
+                <li>图片是否在 <code>images/background/</code> 文件夹</li>
+                <li>文件名是否在 <code>SCENE_FILE_MAP</code> 中有映射</li>
+                <li>场景名是否匹配（从状态栏的📍位置提取）</li>
+                <li>图片格式是否支持</li>
+            </ul>
+        </div>
+        <div class="tip info"> <strong>Q: 好感度显示负数？</strong><br> <strong>A:</strong> 状态栏中使用 <code>好感度:-数值/100</code>
+            格式即可显示负数好感度。 </div> <!-- ============================================================ -->
+        <!-- ==================== AI提示词建议 ==================== -->
+        <!-- ============================================================ -->
+        <h2 id="ai-prompt"><span class="emoji">🤖</span> AI提示词建议</h2>
+        <p>为了让AI生成符合格式的回复，可以在系统提示中添加：</p>
+        <pre><code>请按照以下格式输出： 
+            1. 状态栏用 ```markdown``` 包裹 
+            2. 状态栏包含：天数、时间、天气、位置、人物状态、物品栏、人际关系 
+            3. 选项用 [[[ ]]] 包裹，格式为 A. B. C. D. 
+            4. 角色关系格式：【角色名|性别|显隐|心情|好感度:数值/100】-描述 
+            5. 需要切换音乐时，添加 🎵 音乐：音乐名，这个可以放在状态栏中，也可以放在文本中。
+            6. 选项后可以添加 🎵 音乐：音乐名 来切换背景音乐 
+            示例： 
+            ```markdown 
+            【第1天 · 傍晚 · 阴天】 
+            📍 当前位置：大学宿舍 
+            🎵 音乐：温馨
+            【人物状态】 
+            ❤️ 体力：85/100 
+            🧠 理智：92/100 
+            【人际关系】 
+            【张磊|男|显|开心|好感度:75/100】-室友 
+            🎵 音乐：日常 
+            [[[ 请选择： 
+            A. 和张磊聊天 
+            B. 独自看书 
+            ]]] 
+            ```</code></pre>
+        <!-- ============================================================ -->
+        <!-- ==================== 完整示例 ==================== -->
+        <!-- ============================================================ -->
+        <h2 id="examples"><span class="emoji">📚</span> 完整示例</h2>
+        <h3>完整的AI回复示例：</h3>
+        <pre><code>
+```makedown
+【第3天 · 夜晚 · 晴朗】 
+📍 当前位置：教学楼天台
+🎵 音乐：浪漫
+
+【人物状态】
+❤️ 体力：65/100
+🧠 理智：80/100
+🌪️ 混乱值：10/100
+😢 悲伤值：5/100
+
+【角色属性】
+💪 力量：7
+🏃 敏捷：6
+📚 智力：9
+✨ 魅力：8
+
+【物品栏】
+手机：1（电量45%）
+手电筒：1
+笔记本：1（写满笔记）
+能量饮料：2
+
+【人际关系】
+【林晓|女|显|开心|好感度:55/100】-同班同学，天文社社长
+【张磊|男|显|日常|好感度:35/100】-室友，电竞高手
+【李老师|女|隐|严肃|好感度:20/100】-班主任，要求严格
+```
+🎵 音乐：意外
+
+今晚的星空格外璀璨，银河清晰可见。
+微风轻拂，带来远处花香。
+
+[[[
+你站在天台边缘，仰望星空。林晓轻声问道：
+"在想什么呢？"
+
+A. "在想宇宙的浩瀚，我们如此渺小"
+B. "在想你为什么会在这里" （温柔）
+C. "在想明天考试的事" （苦笑）
+D. 沉默不语，静静看星星
+]]]</code></pre>
+
+        <!-- ============================================================ -->
+        <!-- ==================== 底部 ==================== -->
+        <!-- ============================================================ -->
+        <div class="footer">
+            <p> 💖 Made with love for the SillyTavern community<br> 📖 更多问题请查看 <a
+                    href="https://github.com/Tech-Explorer-AI/ST-CinemaMode/issues">GitHub Issues</a> &nbsp;·&nbsp; ⭐ Star
+                on <a href="https://github.com/Tech-Explorer-AI/ST-CinemaMode">GitHub</a> </p>
+            <p style="margin-top: 8px; font-size: 13px; color: #555;"> ST-Cinema Mode v1.0.0 · © 2026 技术探客 · MIT License
+            </p>
+        </div>
+    </div>
+</body>
+
+</html> ```
