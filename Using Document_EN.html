@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ST-Cinema Mode - User Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a1a;
+            color: #ddd;
+            font-family: 'Segoe UI', -apple-system, sans-serif;
+            line-height: 1.8;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: linear-gradient(145deg, rgba(20, 15, 40, 0.95), rgba(10, 10, 30, 0.95));
+            border-radius: 24px;
+            padding: 40px 50px;
+            border: 1px solid rgba(255, 105, 180, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 105, 180, 0.05);
+        }
+
+        /* ========== Header ========== */
+        .header {
+            text-align: center;
+            padding-bottom: 30px;
+            border-bottom: 2px solid rgba(255, 105, 180, 0.3);
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            background: linear-gradient(135deg, #ff69b4, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+
+        .header .subtitle {
+            font-size: 18px;
+            color: #888;
+            margin-top: 8px;
+            letter-spacing: 4px;
+        }
+
+        .header .badges {
+            margin-top: 12px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255, 105, 180, 0.15);
+            border: 1px solid rgba(255, 105, 180, 0.3);
+            border-radius: 20px;
+            padding: 4px 16px;
+            font-size: 14px;
+            color: #ffb6c1;
+        }
+
+        .badge.version {
+            color: #ffd700;
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        /* ========== Table of Contents ========== */
+        .toc {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 16px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            border-left: 4px solid #ff69b4;
+        }
+
+        .toc h2 {
+            font-size: 18px;
+            color: #ffd700;
+            margin-bottom: 12px;
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 8px 20px;
+        }
+
+        .toc a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.2s;
+            display: block;
+            padding: 2px 0;
+        }
+
+        .toc a:hover {
+            color: #ff69b4;
+        }
+
+        /* ========== Headings ========== */
+        h2 {
+            font-size: 28px;
+            color: #ffd700;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 105, 180, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h2 .emoji {
+            font-size: 30px;
+        }
+
+        h3 {
+            font-size: 20px;
+            color: #ff69b4;
+            margin-top: 25px;
+            margin-bottom: 12px;
+        }
+
+        h4 {
+            font-size: 17px;
+            color: #ffb6c1;
+            margin-top: 18px;
+            margin-bottom: 8px;
+        }
+
+        /* ========== Code Blocks ========== */
+        pre {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 12px;
+            padding: 16px 20px;
+            overflow-x: auto;
+            border: 1px solid rgba(255, 105, 180, 0.2);
+            margin: 12px 0;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #e0e0e0;
+        }
+
+        code {
+            background: rgba(255, 105, 180, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #ffb6c1;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        pre code {
+            background: transparent;
+            padding: 0;
+            color: inherit;
+        }
+
+        /* ========== Tables ========== */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 12px 0;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 105, 180, 0.15);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+
+        th {
+            background: rgba(255, 105, 180, 0.15);
+            color: #ffd700;
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid rgba(255, 105, 180, 0.3);
+        }
+
+        td {
+            padding: 9px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            color: #ccc;
+        }
+
+        tr:hover td {
+            background: rgba(255, 105, 180, 0.05);
+        }
+
+        /* ========== Tips ========== */
+        .tip {
+            background: rgba(255, 215, 0, 0.08);
+            border-left: 4px solid #ffd700;
+            padding: 12px 18px;
+            border-radius: 8px;
+            margin: 12px 0;
+            color: #ddd;
+        }
+
+        .tip strong {
+            color: #ffd700;
+        }
+
+        .tip.warning {
+            background: rgba(255, 68, 68, 0.08);
+            border-left-color: #ff4444;
+        }
+
+        .tip.warning strong {
+            color: #ff8888;
+        }
+
+        .tip.info {
+            background: rgba(78, 205, 196, 0.08);
+            border-left-color: #4ecdc4;
+        }
+
+        .tip.info strong {
+            color: #4ecdc4;
+        }
+
+        .tip ul {
+            margin: 6px 0 0 20px;
+        }
+
+        /* ========== File Tree ========== */
+        .file-tree {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            padding: 16px 24px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #bbb;
+            border: 1px solid rgba(255, 105, 180, 0.1);
+        }
+
+        .file-tree .folder {
+            color: #ffd700;
+        }
+
+        .file-tree .file {
+            color: #88ccff;
+        }
+
+        .file-tree .highlight {
+            color: #ff69b4;
+        }
+
+        /* ========== Tags ========== */
+        .tag {
+            display: inline-block;
+            background: rgba(255, 105, 180, 0.15);
+            border-radius: 12px;
+            padding: 2px 12px;
+            font-size: 13px;
+            color: #ffb6c1;
+            margin: 2px 4px 2px 0;
+        }
+
+        .tag.green {
+            background: rgba(78, 205, 196, 0.15);
+            color: #4ecdc4;
+        }
+
+        .tag.gold {
+            background: rgba(255, 215, 0, 0.15);
+            color: #ffd700;
+        }
+
+        .tag.red {
+            background: rgba(255, 68, 68, 0.15);
+            color: #ff8888;
+        }
+
+        /* ========== Lists ========== */
+        ol,
+        ul {
+            margin: 8px 0 8px 24px;
+        }
+
+        li {
+            margin: 4px 0;
+            color: #ccc;
+        }
+
+        /* ========== Responsive ========== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            pre {
+                font-size: 13px;
+                padding: 12px 14px;
+            }
+
+            .toc-grid {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            th,
+            td {
+                padding: 6px 10px;
+            }
+        }
+
+        /* ========== Scrollbar ========== */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ff69b4;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff88cc;
+        }
+
+        /* ========== Syntax Highlighting ========== */
+        .hljs-keyword {
+            color: #ff69b4;
+        }
+
+        .hljs-string {
+            color: #ffd700;
+        }
+
+        .hljs-comment {
+            color: #666;
+            font-style: italic;
+        }
+
+        .hljs-number {
+            color: #4ecdc4;
+        }
+
+        .hljs-function {
+            color: #88ccff;
+        }
+
+        .hljs-variable {
+            color: #ffb6c1;
+        }
+
+        /* ========== Footer ========== */
+        .footer {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 105, 180, 0.15);
+            color: #666;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: #ff69b4;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #ffd700;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- ==================== HEADER ==================== -->
+        <div class="header">
+            <h1>🎬 ST-Cinema Mode</h1>
+            <div class="subtitle">— Complete User Guide —</div>
+            <div class="badges">
+                <span class="badge version">📌 v1.0.0</span>
+                <span class="badge">🎨 25+ Themes</span>
+                <span class="badge">🎲 Dice System</span>
+                <span class="badge">👥 Smart Characters</span>
+            </div>
+        </div>
+
+        <!-- ==================== TABLE OF CONTENTS ==================== -->
+        <div class="toc">
+            <h2>📋 Table of Contents</h2>
+            <div class="toc-grid">
+                <a href="#prompt-format">📝 Prompt Format</a>
+                <a href="#image-naming">🖼️ Image Naming</a>
+                <a href="#music-naming">🎵 Music Naming</a>
+                <a href="#background-naming">🌄 Background Naming</a>
+                <a href="#code-locations">🔧 Code Locations</a>
+                <a href="#details">💡 Usage Details</a>
+                <a href="#faq">❓ FAQ</a>
+                <a href="#examples">📚 Complete Examples</a>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- ==================== PROMPT FORMAT ==================== -->
+        <!-- ============================================================ -->
+
+        <h2 id="prompt-format"><span class="emoji">📝</span> Prompt Format</h2>
+
+        <h3>1. Status Bar Format</h3>
+        <p>The status bar must be wrapped with <code>```markdown</code>:</p>
+
+        <pre><code>```markdown
+```markdown
+【Day 2 · Night · Sunny】
+📍 Current Location: Rooftop
+🎵 Music: Romantic
+
+【Character Status】
+❤️ Health: value/max
+🧠 Sanity: value/max
+😢 Sadness: value/max
+
+【Attributes】
+💪 Strength: value
+🏃 Agility: value
+📚 Intelligence: value
+
+【Inventory】
+Item Name 1: quantity (note)
+Item Name 2: quantity
+
+【Relationships】
+【Name|Gender|Visible|Mood|Affection:value/100】-Description
+
+【Any Other Section】
+Any content...
+```</code></pre>
+
+        <h4>Status Bar Field Reference:</h4>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Format</th>
+                        <th>Example</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Day</td>
+                        <td><code>Day X</code></td>
+                        <td><code>Day 1</code></td>
+                        <td>Auto-detected</td>
+                    </tr>
+                    <tr>
+                        <td>Time</td>
+                        <td><code>Dawn/Morning/Noon/Afternoon/Evening/Night/Late Night</code></td>
+                        <td><code>Evening</code></td>
+                        <td>Auto-detected</td>
+                    </tr>
+                    <tr>
+                        <td>Weather</td>
+                        <td><code>Sunny/Cloudy/Rainy/Stormy/Snowy/Foggy</code></td>
+                        <td><code>Cloudy</code></td>
+                        <td>Auto-detected</td>
+                    </tr>
+                    <tr>
+                        <td>Location</td>
+                        <td><code>📍 Current Location: XXX</code></td>
+                        <td><code>📍 Current Location: Dormitory</code></td>
+                        <td>Auto-detected</td>
+                    </tr>
+                    <tr>
+                        <td>Status Attributes</td>
+                        <td><code>Name: value/max</code></td>
+                        <td><code>Health: 85/100</code></td>
+                        <td>Displays as progress bar</td>
+                    </tr>
+                    <tr>
+                        <td>Character Attributes</td>
+                        <td><code>Name: value</code></td>
+                        <td><code>Strength: 8</code></td>
+                        <td>Displays as number</td>
+                    </tr>
+                    <tr>
+                        <td>Items</td>
+                        <td><code>Name: quantity (note)</code></td>
+                        <td><code>Phone: 1 (67% battery)</code></td>
+                        <td>Displays with icon</td>
+                    </tr>
+                    <tr>
+                        <td>Relationships</td>
+                        <td><code>【Name|Gender|Visible|Mood|Affection:value/100】-Description</code></td>
+                        <td><code>【Zhang Lei|Male|Visible|Happy|Affection:75/100】-Roommate</code></td>
+                        <td>Displays portrait + affection</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tip">
+            <strong>💡 Relationship Format Details:</strong><br>
+            <code>【Name|Gender|Visible|Mood|Affection:value/100】-Description</code><br>
+            <span class="tag">Gender</span> Male / Female
+            <span class="tag">Visible</span> Visible / Hidden
+            <span class="tag">Mood</span> Happy/Shy/Angry/Sad/Surprised/Warm/Nervous/Romantic/Joyful/Daily
+            <span class="tag">Affection</span> -100 ~ +100
+            <span class="tag">Description</span> Relationship description
+        </div>
+
+        <h3>2. Options Format</h3>
+        <p>Options must be wrapped with <code>[[[</code> and <code>]]]</code>:</p>
+
+        <pre><code>[[[
+Choose your action:
+A. Option content one
+B. Option content two
+C. Option content three
+D. Option content four
+]]]</code></pre>
+
+        <h4>Supported Option Formats:</h4>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Format</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>[A] Text</code></td>
+                        <td><code>[A] Play games with Zhang Lei</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>A. Text</code></td>
+                        <td><code>A. Play games with Zhang Lei</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>**A.** Text</code></td>
+                        <td><code>**A.** Play games with Zhang Lei</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>A) Text</code></td>
+                        <td><code>A) Play games with Zhang Lei</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>A、Text</code></td>
+                        <td><code>A、Play games with Zhang Lei</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>3. Music Switch Format</h3>
+        <p>Add any of these formats anywhere to switch background music:</p>
+        <pre><code>🎵 Music: MusicName
+[Music: MusicName]
+【Music: MusicName】
+Play music: MusicName
+BGM: MusicName</code></pre>
+        <p><strong>Example:</strong> <code>🎵 Music: Romantic</code></p>
+
+        <h3>4. Complete Example</h3>
+        <pre><code>
+```markdown
+【Day 2 · Night · Sunny】
+📍 Current Location: Rooftop
+🎵 Music: Romantic
+【Character Status】
+❤️ Health: 72/100
+🧠 Sanity: 88/100
+🌪️ Confusion: 15/100
+
+【Attributes】
+💪 Strength: 6
+🏃 Agility: 8
+📚 Intelligence: 9
+
+【Relationships】
+【Lin Xiao|Female|Visible|Happy|Affection:45/100】- Classmate, loves stargazing
+【Zhang Lei|Male|Visible|Daily|Affection:30/100】- Roommate, cheerful
+
+【Inventory】
+Phone: 1 (67% battery)
+Flashlight: 1 (fully charged)
+Star Chart: 1
+```
+🎵 Music: Calm
+
+[[[
+The starry sky is beautiful tonight. What do you want to do?
+A. Watch stars with Lin Xiao
+B. Contemplate life alone
+C. Call Zhang Lei
+D. Go back to the dormitory
+]]]</code></pre>
+
+        <!-- ============================================================ -->
+        <!-- ==================== IMAGE NAMING ==================== -->
+        <!-- ============================================================ -->
+        <h2 id="image-naming"><span class="emoji">🖼️</span> Image Naming</h2>
+        <h3>1. Character Portraits</h3>
+        <h4>Directory Structure:</h4>
+        <div class="file-tree"> <span class="folder">📁 images/</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="folder">📁 portrait/</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="folder">📁 library/</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">📁
+                Female/</span> <span class="highlight">← Female portraits</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── 1.png</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── 2.png</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">└── ...</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">📁 Male/</span>
+            <span class="highlight">← Male portraits</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── 1.png</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">└── ...</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">📁
+                Universal/</span> <span class="highlight">← Universal portraits</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── 1.png</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">└── 2.png</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">📁 player/</span> <span
+                class="highlight">← Player portraits (optional)</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">└── Player.png</span> </div>
+        <h4>Naming Rules:</h4>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Naming</th>
+                        <th>Example</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="tag">Exact Match</span></td>
+                        <td><code>Name.format</code></td>
+                        <td><code>Lin Xiao.png</code></td>
+                        <td>Direct name match</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag gold">Mood Folders</span></td>
+                        <td><code>Name/Mood.format</code></td>
+                        <td><code>Lin Xiao/Happy.png</code></td>
+                        <td>Switches by mood</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag green">Library</span></td>
+                        <td><code>number.format</code></td>
+                        <td><code>1.png</code></td>
+                        <td>Random assignment</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tip info"> <strong>📌 Supported Image Formats:</strong> <span class="tag">.png</span> (recommended)
+            <span class="tag">.jpg</span> <span class="tag">.jpeg</span> <span class="tag">.webp</span> </div>
+        <h4>Mood Folder Portraits (Advanced):</h4>
+        <div class="file-tree"> <span class="folder">📁 images/portrait/library/Female/Lin Xiao/</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── Daily.png</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── Happy.png</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── Shy.png</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── Angry.png</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── Sad.png</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├──
+                Surprised.png</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── Warm.png</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── Nervous.png</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── Romantic.png</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">└──
+                Joyful.png</span> </div>
+        <p>The system automatically switches portraits based on the character's current mood.</p>
+        <h3>2. Scene Backgrounds</h3>
+        <h4>Directory Structure:</h4>
+        <div class="file-tree"> <span class="folder">📁 images/background/</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── Title.jpg</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├──
+                Classroom.jpg</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── Rooftop.jpg</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── Sky.jpg</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── Alley.jpg</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├──
+                London.jpg</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── Grassland.jpg</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── Forest.jpg</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── Ocean.jpg</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">└── Default.jpg</span>
+        </div> <!-- ============================================================ -->
+        <!-- ==================== MUSIC NAMING ==================== -->
+        <!-- ============================================================ -->
+        <h2 id="music-naming"><span class="emoji">🎵</span> Music Naming</h2>
+        <h4>Directory Structure:</h4>
+        <div class="file-tree"> <span class="folder">📁 images/music/</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── Daily.mp3</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├──
+                Joyful.mp3</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── Warm.mp3</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── Tense.mp3</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── Romantic.mp3</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├──
+                Sad.mp3</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── Calm.mp3</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── Mysterious.mp3</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── Uplifting.mp3</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├──
+                Competition.mp3</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── Melancholy.mp3</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── Surprise.mp3</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="file">├── Hope.mp3</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── Theme.mp3</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">└── NewBeginning.mp3</span> </div>
+        <div class="tip info"> <strong>📌 Supported Audio Formats:</strong> <span class="tag">.mp3</span> (recommended)
+            <span class="tag">.ogg</span> <span class="tag">.wav</span> <span class="tag">.aac</span> </div>
+        <!-- ============================================================ -->
+        <!-- ==================== BACKGROUND NAMING ==================== -->
+        <!-- ============================================================ -->
+        <h2 id="background-naming"><span class="emoji">🌄</span> Background Naming</h2>
+        <h4>Scene File Map (SCENE_FILE_MAP):</h4>
+        <p>Find the <code>SCENE_FILE_MAP</code> object in <code>index.js</code>:</p>
+        <pre><code><span class="hljs-keyword">const</span> SCENE_FILE_MAP = { <span class="hljs-string">'Title'</span>: <span class="hljs-string">'Title'</span>, <span class="hljs-string">'Classroom'</span>: <span class="hljs-string">'Classroom'</span>, <span class="hljs-string">'Sky'</span>: <span class="hljs-string">'Sky'</span>, <span class="hljs-string">'Rooftop'</span>: <span class="hljs-string">'Rooftop'</span>, <span class="hljs-string">'Alley'</span>: <span class="hljs-string">'Alley'</span>, <span class="hljs-string">'London'</span>: <span class="hljs-string">'London'</span>, <span class="hljs-string">'Luoyang'</span>: <span class="hljs-string">'Luoyang'</span>, <span class="hljs-string">'Kaifeng'</span>: <span class="hljs-string">'Kaifeng'</span>, <span class="hljs-comment">// ... add more mappings</span> <span class="hljs-string">'Default'</span>: <span class="hljs-string">'Default'</span> };</code></pre>
+        <div class="tip"> <strong>📌 Adding a New Background:</strong><br> 1. Place the image in
+            <code>images/background/</code><br> 2. Add a mapping in <code>SCENE_FILE_MAP</code>:
+            <pre><code><span class="hljs-string">'NewSceneName'</span>: <span class="hljs-string">'ImageFileName'</span>, <span class="hljs-comment">// without extension</span></code></pre>
+        </div>
+        <div class="tip info"> <strong>📌 Supported Image Formats:</strong> <span class="tag">.jpg</span> (recommended)
+            <span class="tag">.png</span> <span class="tag">.jpeg</span> <span class="tag">.webp</span> <span
+                class="tag">.gif</span> </div> <!-- ============================================================ -->
+        <!-- ==================== CODE LOCATIONS ==================== -->
+        <!-- ============================================================ -->
+        <h2 id="code-locations"><span class="emoji">🔧</span> Code Modification Locations</h2>
+        <p><strong>File:</strong> <code>index.js</code></p>
+        <h3>1. Add New Background Scenes</h3>
+        <p><strong>Search:</strong> <code>SCENE_FILE_MAP</code></p>
+        <pre><code><span class="hljs-keyword">const</span> SCENE_FILE_MAP = { <span class="hljs-string">'Title'</span>: <span class="hljs-string">'Title'</span>, <span class="hljs-string">'Classroom'</span>: <span class="hljs-string">'Classroom'</span>, <span class="hljs-comment">// Add new background mappings here</span> <span class="hljs-string">'NewScene'</span>: <span class="hljs-string">'ImageFile'</span>, <span class="hljs-comment">// e.g., 'Castle': 'castle'</span> <span class="hljs-string">'Default'</span>: <span class="hljs-string">'Default'</span> };</code></pre>
+        <h3>2. Add New Mood Music</h3>
+        <p><strong>Search:</strong> <code>MUSIC_MAP</code></p>
+        <pre><code><span class="hljs-keyword">const</span> MUSIC_MAP = { <span class="hljs-string">'Happy'</span>: <span class="hljs-string">'Joyful'</span>, <span class="hljs-string">'Shy'</span>: <span class="hljs-string">'Warm'</span>, <span class="hljs-comment">// Add new mood mappings here</span> <span class="hljs-string">'NewMood'</span>: <span class="hljs-string">'MusicFileName'</span>, <span class="hljs-comment">// e.g., 'Epic': 'epic'</span> <span class="hljs-string">'Daily'</span>: <span class="hljs-string">'Daily'</span> };</code></pre>
+        <h3>3. Add New Emotion Keywords</h3>
+        <p><strong>Search:</strong> <code>EMOTION_KEYWORDS</code></p>
+        <pre><code><span class="hljs-keyword">const</span> EMOTION_KEYWORDS = { <span class="hljs-string">'Happy'</span>: [<span class="hljs-string">'haha'</span>, <span class="hljs-string">'happy'</span>, <span class="hljs-string">'glad'</span>], <span class="hljs-string">'Shy'</span>: [<span class="hljs-string">'blush'</span>, <span class="hljs-string">'embarrassed'</span>], <span class="hljs-comment">// Add new emotion keywords here</span> <span class="hljs-string">'NewEmotion'</span>: [<span class="hljs-string">'keyword1'</span>, <span class="hljs-string">'keyword2'</span>, <span class="hljs-string">'keyword3'</span>], };</code></pre>
+        <h3>4. Add New Item Icons</h3>
+        <p><strong>Search:</strong> <code>ITEM_ICON_MAP</code></p>
+        <pre><code><span class="hljs-keyword">const</span> ITEM_ICON_MAP = { <span class="hljs-string">'Phone'</span>: <span class="hljs-string">'📱'</span>, <span class="hljs-string">'Computer'</span>: <span class="hljs-string">'💻'</span>, <span class="hljs-comment">// Add new item icons here</span> <span class="hljs-string">'NewItem'</span>: <span class="hljs-string">'Icon'</span>, <span class="hljs-comment">// e.g., 'Magic Book': '📕'</span> };</code></pre>
+        <h3>5. Add New Mood Icons</h3>
+        <p><strong>Search:</strong> <code>MOOD_ICON_MAP</code></p>
+        <pre><code><span class="hljs-keyword">const</span> MOOD_ICON_MAP = { <span class="hljs-string">'Happy'</span>: <span class="hljs-string">'😊'</span>, <span class="hljs-string">'Shy'</span>: <span class="hljs-string">'😳'</span>, <span class="hljs-comment">// Add new mood icons here</span> <span class="hljs-string">'NewMood'</span>: <span class="hljs-string">'Icon'</span>, <span class="hljs-comment">// e.g., 'Excited': '🤩'</span> };</code></pre>
+        <h3>6. Add New Section Keywords</h3>
+        <p><strong>Search:</strong> <code>SECTION_KEYWORDS</code></p>
+        <pre><code><span class="hljs-keyword">const</span> SECTION_KEYWORDS = { <span class="hljs-string">'Character Status'</span>: [<span class="hljs-string">'Character Status'</span>, <span class="hljs-string">'Status'</span>], <span class="hljs-string">'Attributes'</span>: [<span class="hljs-string">'Attributes'</span>, <span class="hljs-string">'Stats'</span>], <span class="hljs-comment">// Add new sections here</span> <span class="hljs-string">'NewSection'</span>: [<span class="hljs-string">'Keyword1'</span>, <span class="hljs-string">'Keyword2'</span>], };</code></pre>
+        <h3>7. Custom Themes</h3>
+        <p><strong>Search:</strong> <code>this.themes = {</code></p>
+        <pre><code><span class="hljs-keyword">class</span> ThemeManager { <span class="hljs-function">constructor</span>() { <span class="hljs-keyword">this</span>.themes = { <span class="hljs-string">'default'</span>: { name: <span class="hljs-string">'Default'</span>, icon: <span class="hljs-string">'🎬'</span>, description: <span class="hljs-string">'Classic cinema style'</span>, colors: { primary: <span class="hljs-string">'#ff69b4'</span>, secondary: <span class="hljs-string">'#ff4444'</span>, bg: <span class="hljs-string">'linear-gradient(135deg, #0a0a1a, #1a1a2e)'</span>, text: <span class="hljs-string">'#ffffff'</span>, accent: <span class="hljs-string">'#ffd700'</span>, cardBg: <span class="hljs-string">'rgba(0,0,0,0.6)'</span>, border: <span class="hljs-string">'rgba(255,105,180,0.3)'</span>, glow: <span class="hljs-string">'rgba(255,105,180,0.2)'</span>, textAreaBg: <span class="hljs-string">'rgba(0,0,0,0.75)'</span> } }, <span class="hljs-comment">// Add new theme here</span> <span class="hljs-string">'newtheme'</span>: { name: <span class="hljs-string">'Theme Name'</span>, icon: <span class="hljs-string">'🌟'</span>, description: <span class="hljs-string">'Theme description'</span>, colors: { primary: <span class="hljs-string">'#color'</span>, secondary: <span class="hljs-string">'#color'</span>, bg: <span class="hljs-string">'background gradient'</span>, text: <span class="hljs-string">'#text color'</span>, accent: <span class="hljs-string">'#accent color'</span>, cardBg: <span class="hljs-string">'card background'</span>, border: <span class="hljs-string">'border color'</span>, glow: <span class="hljs-string">'glow color'</span>, textAreaBg: <span class="hljs-string">'text area background'</span> } } }; } }</code></pre>
+        <h3>8. Adjust Portrait Library Count</h3>
+        <p><strong>Search:</strong> <code>discoverImagesByFolder</code></p>
+        <pre><code><span class="hljs-keyword">async</span> <span class="hljs-function">discoverImagesByFolder</span>() { <span class="hljs-keyword">const</span> commonFormats = [<span class="hljs-string">'png'</span>, <span class="hljs-string">'jpg'</span>, <span class="hljs-string">'jpeg'</span>, <span class="hljs-string">'webp'</span>];
+<span class="hljs-comment">// Female portrait count (default 1-91)</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i <= <span class="hljs-number">91</span>; i++) {
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> format <span class="hljs-keyword">of</span> commonFormats) {
+<span class="hljs-keyword">this</span>.portraitLibrary.female.push(<span class="hljs-string"><span class="hljs-subst">${i}</span>.<span class="hljs-subst">${format}</span></span>);
+}
+}
+
+<span class="hljs-comment">// Male portrait count (default 1-12)</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i <= <span class="hljs-number">12</span>; i++) {
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> format <span class="hljs-keyword">of</span> commonFormats) {
+<span class="hljs-keyword">this</span>.portraitLibrary.male.push(<span class="hljs-string"><span class="hljs-subst">${i}</span>.<span class="hljs-subst">${format}</span></span>);
+}
+}
+
+<span class="hljs-comment">// Universal portrait count (default 1-2)</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i <= <span class="hljs-number">2</span>; i++) {
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> format <span class="hljs-keyword">of</span> commonFormats) {
+<span class="hljs-keyword">this</span>.portraitLibrary.unknown.push(<span class="hljs-string"><span class="hljs-subst">${i}</span>.<span class="hljs-subst">${format}</span></span>);
+}
+}
+}</code></pre>
+
+        <!-- ============================================================ -->
+        <!-- ==================== USAGE DETAILS ==================== -->
+        <!-- ============================================================ -->
+        <h2 id="details"><span class="emoji">💡</span> Usage Details</h2>
+        <h3>1. Character Portrait Priority</h3>
+        <p>The system loads character portraits in this priority order:</p>
+        <ol>
+            <li><strong>Mood folder portraits</strong> - <code>images/portrait/library/[Gender]/[Name]/[Mood].png</code>
+            </li>
+            <li><strong>Exact match portraits</strong> - <code>images/portrait/[Name].png</code></li>
+            <li><strong>Gender folder portraits</strong> - <code>images/portrait/library/[Gender]/[number].png</code>
+            </li>
+            <li><strong>Universal portraits</strong> - <code>images/portrait/library/Universal/[number].png</code></li>
+            <li><strong>Default placeholder</strong> - 👤 emoji</li>
+        </ol>
+        <h3>2. Mood Auto-Detection</h3>
+        <p>The system automatically detects character mood based on keywords in text:</p>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mood</th>
+                        <th>Trigger Keywords</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Happy</td>
+                        <td>haha, happy, glad, great, yeah, 😊, joyful, excited</td>
+                    </tr>
+                    <tr>
+                        <td>Shy</td>
+                        <td>blush, embarrassed, don't say, 😳, shy, timid</td>
+                    </tr>
+                    <tr>
+                        <td>Angry</td>
+                        <td>angry, furious, damn, jerk, 😠, annoyed, rage</td>
+                    </tr>
+                    <tr>
+                        <td>Sad</td>
+                        <td>sigh, sad, upset, lost, 😢, heartbroken, depressed</td>
+                    </tr>
+                    <tr>
+                        <td>Surprised</td>
+                        <td>what, really, surprised, 😲, shocked, unexpected</td>
+                    </tr>
+                    <tr>
+                        <td>Warm</td>
+                        <td>gentle, smile, sunshine, warm, caring, 🥰</td>
+                    </tr>
+                    <tr>
+                        <td>Nervous</td>
+                        <td>nervous, danger, uneasy, afraid, scared, 😖</td>
+                    </tr>
+                    <tr>
+                        <td>Romantic</td>
+                        <td>heartbeat, love, hold hands, hug, 💕, sweet</td>
+                    </tr>
+                    <tr>
+                        <td>Uplifting</td>
+                        <td>uplifting, excited, hyped, fighting spirit, passionate</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <h3>3. Affection Stages</h3>
+        <p>The system automatically displays stages based on values:</p>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Range</th>
+                        <th>Stage</th>
+                        <th>Icon</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>90-100</td>
+                        <td>Soulmate</td>
+                        <td>💕</td>
+                    </tr>
+                    <tr>
+                        <td>70-89</td>
+                        <td>In Love</td>
+                        <td>💗</td>
+                    </tr>
+                    <tr>
+                        <td>50-69</td>
+                        <td>Like</td>
+                        <td>💖</td>
+                    </tr>
+                    <tr>
+                        <td>30-49</td>
+                        <td>Friendly</td>
+                        <td>💙</td>
+                    </tr>
+                    <tr>
+                        <td>10-29</td>
+                        <td>Acquainted</td>
+                        <td>💚</td>
+                    </tr>
+                    <tr>
+                        <td>0-9</td>
+                        <td>Stranger</td>
+                        <td>💔</td>
+                    </tr>
+                    <tr>
+                        <td>-1 to -19</td>
+                        <td>Cold</td>
+                        <td>😒</td>
+                    </tr>
+                    <tr>
+                        <td>-20 to -49</td>
+                        <td>Disgusted</td>
+                        <td>😤</td>
+                    </tr>
+                    <tr>
+                        <td>-50 to -79</td>
+                        <td>Hate</td>
+                        <td>👿</td>
+                    </tr>
+                    <tr>
+                        <td>-80 to -100</td>
+                        <td>Nemesis</td>
+                        <td>⚔️</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <h3>4. Auto-Play Speed</h3>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Speed Setting</th>
+                        <th>Words/Min</th>
+                        <th>Best For</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>slow</code></td>
+                        <td>180</td>
+                        <td>Detailed reading</td>
+                    </tr>
+                    <tr>
+                        <td><code>galgame</code></td>
+                        <td>240</td>
+                        <td>Visual novel style</td>
+                    </tr>
+                    <tr>
+                        <td><code>normal</code></td>
+                        <td>300</td>
+                        <td>Standard reading</td>
+                    </tr>
+                    <tr>
+                        <td><code>fast</code></td>
+                        <td>450</td>
+                        <td>Quick browsing</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p>Switch speed in console:</p>
+        <pre><code>setReadingSpeed('galgame') <span class="hljs-comment">// Options: slow, normal, fast, galgame</span></code></pre>
+        <h3>5. Dice System</h3>
+        <ul>
+            <li>Supported dice: D4, D6, D8, D10, D12, D20, D100</li>
+            <li>Supports modifiers (e.g., D20+5)</li>
+            <li>Auto-detects Natural 20 (critical success) and Natural 1 (critical failure)</li>
+        </ul>
+        <p><strong>Dice Result Format:</strong></p>
+        <pre><code>[Dice Result] Rolled d20 = 18 + 2 = 20 [Dice Result] Rolled d20 = 20 ✨ Critical Success! (Natural 20) ✨ [Dice Result] Rolled d20 = 1 💀 Critical Failure! (Natural 1) 💀</code></pre>
+        <h3>6. Data Persistence</h3>
+        <p>All data is automatically saved in browser local storage:</p>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Storage Key</th>
+                        <th>Content</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>cinema_mode_data</code></td>
+                        <td>Complete cinema mode save</td>
+                    </tr>
+                    <tr>
+                        <td><code>cinema_sync_data</code></td>
+                        <td>Status sync data</td>
+                    </tr>
+                    <tr>
+                        <td><code>cinema_game_log</code></td>
+                        <td>Game log</td>
+                    </tr>
+                    <tr>
+                        <td><code>cinema_theme</code></td>
+                        <td>Current theme setting</td>
+                    </tr>
+                    <tr>
+                        <td><code>cinema_summaries</code></td>
+                        <td>Context summaries</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <h3>7. Keyboard Shortcuts</h3>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Shortcut</th>
+                        <th>Function</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Click text area</td>
+                        <td>Advance to next segment</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl+Enter</td>
+                        <td>Send custom command</td>
+                    </tr>
+                    <tr>
+                        <td>Enter (in input box)</td>
+                        <td>New line</td>
+                    </tr>
+                    <tr>
+                        <td>Esc</td>
+                        <td>Close options panel</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> <!-- ============================================================ -->
+        <!-- ==================== FAQ ==================== -->
+        <!-- ============================================================ -->
+        <h2 id="faq"><span class="emoji">❓</span> Frequently Asked Questions</h2>
+        <div class="tip warning"> <strong>Q: Character portraits don't display?</strong><br> <strong>A:</strong> Check:
+            <ul>
+                <li>Images are in the correct folder (<code>images/portrait/library/Female/</code> or
+                    <code>images/portrait/library/Male/</code>)</li>
+                <li>File names match exactly (case-sensitive for English, Chinese names work)</li>
+                <li>Image format is supported (PNG recommended)</li>
+                <li>Character name appears in the Relationships section of the status bar</li>
+            </ul>
+        </div>
+        <div class="tip warning"> <strong>Q: Music doesn't play?</strong><br> <strong>A:</strong> Check: <ul>
+                <li>Music file is MP3 format</li>
+                <li>File is in <code>images/music/</code> directory</li>
+                <li>Browser allows autoplay</li>
+                <li>Music file name matches the mapping in <code>MUSIC_MAP</code></li>
+            </ul>
+        </div>
+        <div class="tip warning"> <strong>Q: Status bar isn't parsed?</strong><br> <strong>A:</strong> Check: <ul>
+                <li>Wrapped with <code>```</code> (three backticks)</li>
+                <li>Format is correct (uses colon <code>：</code> or <code>:</code>)</li>
+                <li>Section names are in the keyword list</li>
+                <li>Has <code>```markdown</code> before the status bar</li>
+            </ul>
+        </div>
+        <div class="tip warning"> <strong>Q: Options don't appear?</strong><br> <strong>A:</strong> Check: <ul>
+                <li>Wrapped with <code>[[[</code> and <code>]]]</code></li>
+                <li>Option format is correct (A. B. C. D.)</li>
+                <li>Options are on separate lines</li>
+            </ul>
+        </div>
+        <div class="tip warning"> <strong>Q: Background image doesn't display?</strong><br> <strong>A:</strong> Check:
+            <ul>
+                <li>Image is in <code>images/background/</code> folder</li>
+                <li>File name is mapped in <code>SCENE_FILE_MAP</code></li>
+                <li>Scene name matches (extracted from the 📍 location in the status bar)</li>
+                <li>Image format is supported</li>
+            </ul>
+        </div>
+        <div class="tip info"> <strong>Q: Affection displays negative values?</strong><br> <strong>A:</strong> Use the
+            format <code>Affection:-value/100</code> in the status bar to display negative affection. </div>
+        <!-- ============================================================ -->
+        <!-- ==================== AI PROMPT SUGGESTIONS ==================== -->
+        <!-- ============================================================ -->
+        <h2 id="ai-prompt"><span class="emoji">🤖</span> AI Prompt Suggestions</h2>
+        <p>To help the AI generate properly formatted responses, add this to your system prompt:</p>
+        <pre><code>Please format your output as follows: 
+            1. Status bar wrapped in ```markdown ```
+            2. Status bar includes: Day, Time, Weather, Location, Character Status, Inventory, Relationships 
+            3. Options wrapped in [[[ ]]], format as A. B. C. D. 
+            4. Relationship format: 【Name|Gender|Visible|Mood|Affection:value/100】-Description 
+            5. To switch music, add 🎵 Music: MusicName 
+            6. You can add 🎵 Music: MusicName after options to switch background music Example: 
+            ```markdown 
+            【Day 1 · Evening · Cloudy】 
+            📍 Current Location: Dormitory 
+            🎵 Music: Romantic
+
+            【Character Status】 
+            ❤️ Health: 85/100 
+            🧠 Sanity: 92/100 
+            【Relationships】 
+            【Zhang Lei|Male|Visible|Happy|Affection:75/100】-Roommate 
+            ``` 
+            🎵 Music: Daily 
+            [[[ 
+            Choose: 
+            A. Chat with Zhang Lei 
+            B. Read alone 
+            ]]] </code></pre>
+        <!-- ============================================================ -->
+        <!-- ==================== COMPLETE EXAMPLES ==================== -->
+        <!-- ============================================================ -->
+        <h2 id="examples"><span class="emoji">📚</span> Complete Examples</h2>
+        <h3>Complete AI Response Example:</h3>
+        <pre><code>
+```markdown
+【Day 2 · Night · Sunny】
+📍 Current Location: Rooftop
+🎵 Music: Romantic
+【Character Status】
+❤️ Health: 65/100
+🧠 Sanity: 80/100
+🌪️ Confusion: 10/100
+😢 Sadness: 5/100
+
+【Attributes】
+💪 Strength: 7
+🏃 Agility: 6
+📚 Intelligence: 9
+✨ Charm: 8
+
+【Inventory】
+Phone: 1 (45% battery)
+Flashlight: 1
+Notebook: 1 (full of notes)
+Energy Drink: 2
+
+【Relationships】
+【Lin Xiao|Female|Visible|Happy|Affection:55/100】-Classmate, Astronomy Club president
+【Zhang Lei|Male|Visible|Daily|Affection:35/100】-Roommate, esports player
+【Ms. Li|Female|Hidden|Serious|Affection:20/100】-Homeroom teacher, strict
+🎵 Music: Romantic
+
+Tonight's starry sky is especially brilliant, the Milky Way clearly visible.
+A gentle breeze carries the fragrance of distant flowers.
+
+[[[
+You stand at the edge of the rooftop, gazing at the stars. Lin Xiao asks softly:
+"What are you thinking about?"
+
+A. "Thinking about the vastness of the universe, how small we are"
+B. "Thinking about why you're here" (tender)
+C. "Thinking about tomorrow's exam" (bitter smile)
+D. Stay silent, quietly watching the stars
+]]]</code></pre>
+
+        <!-- ============================================================ -->
+        <!-- ==================== FOOTER ==================== -->
+        <!-- ============================================================ -->
+        <div class="footer">
+            <p> 💖 Made with love for the SillyTavern community<br> 📖 For more questions, visit <a
+                    href="https://github.com/yourusername/ST-CinemaMode/issues">GitHub Issues</a> &nbsp;·&nbsp; ⭐ Star
+                on <a href="https://github.com/yourusername/ST-CinemaMode">GitHub</a> </p>
+            <p style="margin-top: 8px; font-size: 13px; color: #555;"> ST-Cinema Mode v1.0.0 · © 2026 技术探客 · MIT License
+            </p>
+        </div>
+    </div>
+</body>
+
+</html> ```
