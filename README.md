@@ -149,19 +149,6 @@
 | 银河 | 浩瀚星河，璀璨壮丽 | Galaxy | Starry galaxy, magnificent |
 | ...及其他20+种 | 各种风格，满足不同心情 | ...and 20+ more | Various styles for every mood |
 
-### 6. Auto-Play Mode / 自动播放模式
-
-![Auto Play](example/auto-play.jpg)
-
-自动播放功能以舒适的节奏阅读故事：
-
-| 速度 (中文) | 字/分钟 | 适合场景 | Speed (English) | Words/Min | Best For |
-|------------|---------|---------|-----------------|-----------|----------|
-| 🐢 慢速 | 180 | 仔细阅读 | 🐢 Slow | 180 | Detailed reading |
-| 🎮 Galgame | 240 | 视觉小说风格 | 🎮 Galgame | 240 | Visual novel style |
-| ⚡ 正常 | 300 | 正常阅读 | ⚡ Normal | 300 | Standard reading |
-| 🚀 快速 | 450 | 快速浏览 | 🚀 Fast | 450 | Quick browsing |
-
 ---
 
 ## 🚀 Installation / 安装方法
@@ -257,10 +244,9 @@ C. 选项三
 |------------|------------|----------------|------------------|
 | 1. **启动** | 点击右下角的 🎬 按钮 | 1. **Launch** | Click the 🎬 button in the bottom-right corner |
 | 2. **导航** | 点击文字区域前进，或使用控制按钮 | 2. **Navigate** | Click the text area to advance, or use the control buttons |
-| 3. **自动播放** | 点击播放按钮自动阅读 | 3. **Auto-play** | Click the play button for automatic reading |
-| 4. **选择选项** | 在选项面板中点击选择 | 4. **Choose Options** | Click your choice in the options panel |
-| 5. **自定义指令** | 在输入框中输入（Ctrl+Enter发送） | 5. **Custom Commands** | Type in the input box (Ctrl+Enter to send) |
-| 6. **掷骰子** | 使用内置骰子进行跑团判定 | 6. **Roll Dice** | Use the built-in dice roller for RPG actions |
+| 3. **选择选项** | 在选项面板中点击选择 | 4. **Choose Options** | Click your choice in the options panel |
+| 4. **自定义指令** | 在输入框中输入（Ctrl+Enter发送） | 5. **Custom Commands** | Type in the input box (Ctrl+Enter to send) |
+| 5. **掷骰子** | 使用内置骰子进行跑团判定 | 6. **Roll Dice** | Use the built-in dice roller for RPG actions |
 
 ---
 
