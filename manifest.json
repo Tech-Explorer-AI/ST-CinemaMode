@@ -1,0 +1,10 @@
+{
+  "display_name": "ST-Cinema Mode 🎬",
+  "description": "将SillyTavern的聊天过程转换为Galgame风格的影院播放器",
+  "loading_order": 20,
+  "js": "index.js",
+  "css": "style.css",
+  "author": "技术探客",
+  "version": "1.0.0",
+  "minimum_client_version": "1.11.0"
+}
