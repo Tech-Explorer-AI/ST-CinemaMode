@@ -6739,7 +6739,6 @@ function createCinemaUI() {
                     
                     <div style="display: flex; justify-content: center; gap: 15px; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">
                         <button id="cinema-prev" class="cinema-control-btn">◀ 上一句</button>
-                        <button id="cinema-play" class="cinema-control-btn">▶ 自动播放</button>
                         <button id="cinema-next" class="cinema-control-btn">下一句 ▶</button>
                         <button id="cinema-music-toggle" class="cinema-control-btn">🔊 音乐</button>
                         <button id="cinema-character-list" class="cinema-control-btn">👥 角色图鉴</button>
