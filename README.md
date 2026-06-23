@@ -188,12 +188,11 @@
 
 *The extension recognizes these special formats:*
 
-````markdown
+```markdown
 ```markdown
 【第1天 · 傍晚 · 阴天】
 📍 当前位置：大学宿舍楼
 
-```markdown
 【人物状态】
 ❤️ 体力：85/100
 🧠 理智：92/100
@@ -206,6 +205,7 @@
 手机：1（电量67%）
 钥匙：1
 ```
+
 选项栏：
 [[[
 请选择你的行动：
@@ -213,7 +213,7 @@ A. 和张磊一起打游戏
 B. 去找李娜聊天
 C. 出门散步
 ]]]
-
+```
 
 ### Status Bar Format / 状态栏格式
 
