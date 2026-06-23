@@ -12,7 +12,7 @@
 
 ### Main Interface / 主界面
 
-![Cinema Mode Main Interface](example/demo-preview.png)
+![Cinema Mode Main Interface](example/demo-preview.jpg)
 
 *沉浸式全屏影院播放器，包含角色立绘、场景背景和动态文本显示。*
 *The immersive full-screen cinema player with character portraits, scene backgrounds, and dynamic text display.*
@@ -80,7 +80,7 @@
 
 ### 1. Cinema Player Interface / 影院播放器界面
 
-![UI Interface](example/ui-interface.png)
+![UI Interface](example/ui-interface.jpg)
 
 | 标注 | 说明 (中文) | Description (English) |
 |------|------------|----------------------|
@@ -93,7 +93,7 @@
 
 ### 2. Character Portraits / 角色立绘
 
-![Character Portraits](example/character-portrait.png)
+![Character Portraits](example/character-portrait.jpg)
 
 扩展自动从对话中识别角色并以立绘显示。每个角色显示：
 
@@ -108,7 +108,7 @@
 
 ### 3. Status Panel / 状态面板
 
-![Status Panel](example/status-panel.png)
+![Status Panel](example/status-panel.jpg)
 
 右侧状态面板实时显示游戏状态：
 
@@ -123,7 +123,7 @@
 
 ### 4. Options Panel / 选项面板
 
-![Options Panel](example/options-panel.png)
+![Options Panel](example/options-panel.jpg)
 
 当AI提供选项时，会显示交互式选项面板：
 
@@ -136,7 +136,7 @@
 
 ### 5. Theme Selector / 主题选择器
 
-![Theme Selector](example/theme-selector.png)
+![Theme Selector](example/theme-selector.jpg)
 
 在"主题"标签页中切换25+种视觉主题：
 
@@ -151,7 +151,7 @@
 
 ### 6. Auto-Play Mode / 自动播放模式
 
-![Auto Play](example/auto-play.png)
+![Auto Play](example/auto-play.jpg)
 
 自动播放功能以舒适的节奏阅读故事：
 
@@ -295,12 +295,12 @@ ST-CinemaMode/
 ├── manifest.json            # 扩展清单 / Extension manifest
 ├── README.md               # 文档 / Documentation
 ├── example/                # 示例图片 / Example images
-│   ├── demo-preview.png    # 主预览 / Main preview
-│   ├── ui-interface.png    # 界面指南 / UI guide
-│   ├── character-portrait.png # 角色示例 / Character example
-│   ├── status-panel.png    # 状态面板 / Status panel
-│   ├── options-panel.png   # 选项面板 / Options panel
-│   └── theme-selector.png  # 主题选择器 / Theme selector
+│   ├── demo-preview.jpg    # 主预览 / Main preview
+│   ├── ui-interface.jpg    # 界面指南 / UI guide
+│   ├── character-portrait.jpg # 角色示例 / Character example
+│   ├── status-panel.jpg    # 状态面板 / Status panel
+│   ├── options-panel.jpg   # 选项面板 / Options panel
+│   └── theme-selector.jpg  # 主题选择器 / Theme selector
 ├── images/
 │   ├── background/         # 场景背景 / Scene backgrounds
 │   ├── portrait/           # 角色立绘 / Character portraits
